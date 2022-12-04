@@ -1,4 +1,4 @@
-#Ben Elleman
+#Ben Elleman and Chris Barlas
 #Lab 4 makefile
 all:  lab4b lab4 tags headers 
 
