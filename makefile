@@ -11,6 +11,9 @@ tags: *.c
 lab4: lab4.o shared.o
 	gcc -g -m64  -o $@ $^ 
 
+plab4: plab4.o
+	gcc -lpthread -g -m64  -o $@ $^ 
+
 lab4b: lab4b.o shared.o
 	gcc -g -m64  -o $@ $^ 
 
