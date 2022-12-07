@@ -8,9 +8,11 @@ headers: *.c tags
 tags: *.c
 	ctags -R .
 
+#Linear version of C-LOOK algorithm
 lab4: lab4.o shared.o
 	gcc -g -m64  -o $@ $^ 
 
+#Parallel version of C-LOOK algorithm (grade this)
 plab4: plab4.o
 	gcc -lpthread -g -m64  -o $@ $^ 
 

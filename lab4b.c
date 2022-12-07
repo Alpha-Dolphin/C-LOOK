@@ -1,4 +1,4 @@
-/* Ben Elleman */
+/* Ben Elleman and Chris Barlas*/
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,6 +1,6 @@
-/*Ben Elleman*/
+/*Ben Elleman and Chris Barlas*/
 
-/*A file for all the shared functions of my two solutions*/
+/*A file for all the shared functions of the two solutions lab4 and lab4b (not parallel versions)*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,17 +48,19 @@ int print(int element) {
 	return element;
 }
 
-/*Swap function for selectionSort 
- * xp - the first element to be swapped
- * yp - the second element to be swapped*/
-void swap(int* xp, int* yp)
+/*Swap helper function for selectionSort referenced from GeeksForGeeks
+ * Source: https://www.geeksforgeeks.org/selection-sort/
+ * first - the first element to be swapped
+ * second - the second element to be swapped*/
+void swap(int *first, int *second)
 {
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+    int temp = *first;
+    *first = *second;
+    *second = temp;
 }
  
-/*Function to perform Selection Sort. Code taken from G4G and modified by me.
+/*Function to perform Selection Sort. Code referenced from GeeksForGeeks and modified by Ben.
+ * Source: https://www.geeksforgeeks.org/selection-sort/
  * arr[] - the array to be sorted
  * returns - the index of the first element > POS*/
 int selectionSort(int arr[])

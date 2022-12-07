@@ -1,4 +1,4 @@
-/* Ben Elleman */
+/* Chris Barlas and Ben Elleman */
 
 void eEC(int cylinders[CYLNUM][CYLLEN], int(function(int))) ;
 void eEQ(int queue[CYLNUM * CYLLEN], int(function(int))) ;

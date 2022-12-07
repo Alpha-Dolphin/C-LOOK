@@ -10,5 +10,5 @@ void printArray(int *arr);
 void printCylinders(int **arr);
 void *sort(int **arr);
 void stuff(int *arr);
-void swap(int* xp, int* yp);
+void swap(int *first, int *second);
 void *worker(void *param);

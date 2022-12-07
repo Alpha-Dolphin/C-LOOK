@@ -9,6 +9,7 @@
 #include "structs.h"
 #include "plab4.h"
 
+/* Runs a C-LOOK Disk Scheduling Algorithm Simulation */
 int main()
 {
 	/*Cylinders represented as an array of pointers to int*/
@@ -26,10 +27,10 @@ int main()
 	results = sort(cylinders);
 
 	/*Print results*/
-	printf("Contents of sorted lower arr:\n");
+	printf("Contents of sorted lower queue:\n");
 	printArray(results->lower);
 
-	printf("Contents of sorted higher arr:\n");
+	printf("Contents of sorted higher queue:\n");
 	printArray(results->higher);
 
 	printf("Contents of balance: %d\n", results->balance);
@@ -42,16 +43,6 @@ int main()
 	freeResults(results);
 	
 	return 0;
-}
-
-/*Swap function for selectionSort 
- * xp - the first element to be swapped
- * yp - the second element to be swapped*/
-void swap(int* xp, int* yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
 }
 
 /*Creates an array of CYLNUM number of int pointers pointing to
@@ -152,8 +143,20 @@ void stuff(int *arr)
 	for(k = 0; k < CYLNUM * CYLLEN; k++) arr[k] = MAX + 1;
 }
 
+/*Swap helper function for selectionSort referenced from GeeksForGeeks
+ * Source: https://www.geeksforgeeks.org/selection-sort/
+ * first - the first element to be swapped
+ * second - the second element to be swapped*/
+void swap(int *first, int *second)
+{
+    int temp = *first;
+    *first = *second;
+    *second = temp;
+}
+
 /*Worker function to perform Selection Sort.
-* Code taken from G4G and modified by Ben Ellemen and Chris Barlas.
+* Code referenced from GeeksForGeeks and extended by Ben Ellemen and Chris Barlas.
+* Source: https://www.geeksforgeeks.org/selection-sort/
  * param - pointer to workerInput struct
  * returns - unused*/
 void *worker(void *param)
@@ -205,7 +208,7 @@ void *sort(int **arr)
 	int i, j;
 	enum SORT_TYPE type = LOWER;
 	pthread_attr_t attr;
-	pthread_t thread_id[2];
+	pthread_t thread_id[THREAD_NO];
 
 	/*Create SortResult space in memory*/
 	SortResult *result = malloc(sizeof(SortResult));
@@ -216,7 +219,7 @@ void *sort(int **arr)
 	pthread_attr_setschedpolicy(&attr, SCHED_OTHER);
 
 	/*Create threads: one for higher sort, one for lower sort*/
-	for(i = 0; i < 2; i++)
+	for(i = 0; i < THREAD_NO; i++)
 	{
 		workerInput *input = malloc(sizeof(workerInput));
 		input->arr = arr;
@@ -227,7 +230,7 @@ void *sort(int **arr)
 	}
 
 	/*Wait for threads to complete*/
-	for(i = 0; i < 2; i++) pthread_join(thread_id[i], NULL);
+	for(i = 0; i < THREAD_NO; i++) pthread_join(thread_id[i], NULL);
 
 	return result;
 }

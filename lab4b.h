@@ -1,4 +1,4 @@
-/* Ben Elleman */
+/* Chris Barlas and Ben Elleman */
 
 int assign(int element) ;
 int main();

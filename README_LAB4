@@ -8,5 +8,5 @@ INSTRUCTOR OF THIS COURSE OR ONE OF OUR UNDERGRADUATE GRADERS.
 Our names are Ben Elleman and Chris Barlas, and this program is a simulation of the disk-scheduling algorithem C-LOOK. This program works by
 first randomly generating a number of secondary storage locations to be brought into memory as well as a disk head currently at given location,
 both of which are determined by define.h. These cylinder locations are then sorted via selection-sort task-level parallelization to find the manner in 
-which they would be accessed via C-LOOK. lab4 and lab4b are the two linear versions of the program, while plab4 is the version that implements
-parallelization. To run the program, simply compile plab4 and run.
+which they would be accessed via C-LOOK. lab4 and lab4b are the two linear versions of the program that Ben originally worked on, while plab4 is the
+version that implements parallelization which was the task of Chris. Please grade plab4. To run the program, simply compile plab4 with "make plab4" and run.
