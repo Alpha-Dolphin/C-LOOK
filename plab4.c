@@ -9,60 +9,6 @@
 #include "structs.h"
 #include "plab4.h"
 
-/*Swap function for selectionSort 
- * xp - the first element to be swapped
- * yp - the second element to be swapped*/
-void swap(int* xp, int* yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
-
-/*Creates an array of CYLNUM number of int pointers pointing to
- * an int array of size CYLLEN
- * returns - array of int pointers 
- */
-int **fillCylinders() {
-	int **ptr_arr = malloc(sizeof(int*) * CYLNUM);
-	int x, y;
-	for (x = 0; x < CYLNUM; x++) {
-		ptr_arr[x] = malloc(sizeof(int) * CYLLEN);
-		for (y = 0; y < CYLLEN; y++) {
-			ptr_arr[x][y] = rand() % MAX;
-		}
-	}
-	return ptr_arr;
-}
-
-/*Frees all dynamically allocated memory for cylinders*/
-void freeCylinders(int **cylinders)
-{
-	int x, y;
-	for (x = 0; x < CYLNUM; x++)
-	{
-		free(cylinders[x]);
-	}
-	free(cylinders);
-}
-
-/*Prints all the cylinders*/
-void printCylinders(int **arr)
-{
-	int x, y;
-	for (x = 0; x < CYLNUM; x++)
-	{
-		for (y = 0; y < CYLLEN; y++) printf("%d\n", arr[x][y]);
-	}
-}
-
-/*Prints a given array*/
-void printArray(int *arr)
-{
-	int i;
-	for(i = 0; i < CYLNUM * CYLLEN; i++) printf("%d\n", arr[i]);
-}
-
 int main()
 {
 	/*Cylinders represented as an array of pointers to int*/
@@ -98,7 +44,67 @@ int main()
 	return 0;
 }
 
-/*Combine the higher and lower arrays into one*/
+/*Swap function for selectionSort 
+ * xp - the first element to be swapped
+ * yp - the second element to be swapped*/
+void swap(int* xp, int* yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+/*Creates an array of CYLNUM number of int pointers pointing to
+ * an int array of size CYLLEN
+ * returns - array of int pointers*/
+int **fillCylinders() {
+	int **ptr_arr = malloc(sizeof(int*) * CYLNUM);
+	int x, y;
+	for (x = 0; x < CYLNUM; x++) {
+		ptr_arr[x] = malloc(sizeof(int) * CYLLEN);
+		for (y = 0; y < CYLLEN; y++) {
+			ptr_arr[x][y] = rand() % MAX;
+		}
+	}
+	return ptr_arr;
+}
+
+/*Frees all dynamically allocated memory for cylinders
+ * cylinders - the cylinders to be freed*/
+void freeCylinders(int **cylinders)
+{
+	int x, y;
+	for (x = 0; x < CYLNUM; x++)
+	{
+		free(cylinders[x]);
+	}
+	free(cylinders);
+}
+
+/*Prints all the cylinders
+ * arr - the cylinders to be printed*/
+void printCylinders(int **arr)
+{
+	int x, y;
+	for (x = 0; x < CYLNUM; x++)
+	{
+		for (y = 0; y < CYLLEN; y++) printf("%d\n", arr[x][y]);
+	}
+}
+
+/*Prints a given array
+ * arr - the 1-dimensional array to be printed*/
+void printArray(int *arr)
+{
+	int i;
+	for(i = 0; i < CYLNUM * CYLLEN; i++) printf("%d\n", arr[i]);
+}
+
+/*Combine the higher and lower arrays into one
+ * lower - the 1-dimensional array of the lower elements
+ * higher - the 1-dimensional array of the higher elements
+ * balance - How many elements are already in higher*/
+
 void combine(int lower[CYLNUM * CYLLEN], int higher[CYLNUM * CYLLEN], int balance)  {
 	int z;
 	for (z = 0; z + balance < CYLNUM * CYLLEN; z++){
@@ -111,8 +117,7 @@ void combine(int lower[CYLNUM * CYLLEN], int higher[CYLNUM * CYLLEN], int balanc
 * arr - the array containing all unsorted cylinders
 * type - determines whether we are looking at HIGHER or LOWER values
 * buffer - array to place filtered values into
-* returns - number of elements moved
-*/
+* returns - number of elements moved*/
 int filter(int **arr, enum SORT_TYPE type, int *buffer)
 {
 	int x, y;
@@ -140,8 +145,7 @@ int filter(int **arr, enum SORT_TYPE type, int *buffer)
 }
 
 /*Stuffs a given queue so that all elements of interest will be at the front once sorted
- * arr - the array to be "stuffed"
- */
+ * arr - the array to be "stuffed"*/
 void stuff(int *arr)
 {
 	int k;
@@ -195,8 +199,7 @@ void *worker(void *param)
 
 /*High level sort method that sorted a given array using task level parallelism
  * arr - the array to be sorted
- * returns - pointer to SortResult containing sorted data
-*/
+ * returns - pointer to SortResult containing sorted data*/
 void *sort(int **arr)
 {
 	int i, j;
@@ -229,7 +232,8 @@ void *sort(int **arr)
 	return result;
 }
 
-/*Frees all dynamically allocated memory for results*/
+/*Frees all dynamically allocated memory for results
+ * ptr - The struct that holds all the data to be freed*/
 void freeResults(SortResult *ptr)
 {
 	free(ptr->lower);
