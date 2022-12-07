@@ -200,7 +200,8 @@ void *worker(void *param)
 	pthread_exit(0);
 }
 
-/*High level sort method that sorted a given array using task level parallelism
+/*High level sort method that sorted a given array using task level parallelism.
+ * Code for creating threads referenced from CSE 2431 Lab 3. Author: Chris Barlas
  * arr - the array to be sorted
  * returns - pointer to SortResult containing sorted data*/
 void *sort(int **arr)
