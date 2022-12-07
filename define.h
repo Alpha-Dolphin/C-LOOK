@@ -1,4 +1,4 @@
-/*Ben Elleman*/
+/*Ben Elleman and Chris Barlas*/
 
 #define POS 50
 #define MAX 100
