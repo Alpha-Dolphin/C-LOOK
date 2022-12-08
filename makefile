@@ -1,6 +1,6 @@
 #Ben Elleman and Chris Barlas
 #Lab 4 makefile
-all:  lab4b lab4 plab4 tags headers 
+all:  tags headers lab4b lab4 plab4
 
 headers: *.c tags
 	headers.sh
